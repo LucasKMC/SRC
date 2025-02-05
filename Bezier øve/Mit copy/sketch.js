@@ -1,48 +1,60 @@
-let p0x = 20
-let p0y = 80
-let p1x = 40
+let p0x = 30
+let p0y = 500
+let p1x = 100
 let p1y = 100
-let p2x = 20
-let p2y = 70
-let p3x = 80
-let p3y = 200
-let t
-let A
-let B 
-let C 
-let D 
-let E  
-let F
-let P
+let p2x = 400
+let p2y = 100
+let p3x = 500
+let p3y = 500
+let t 
+let Ax
+let Ay
+let Bx
+let By
+let Cx
+let Cy
+let Dx
+let Dy
+let Ex
+let Ey
+let Px
+let Py
+
 function setup()
 {
-    createCanvas(400, 400);
-    background(255);
+    createCanvas(600, 600);
+    background(220);
 } 
 function draw()
 {
 
-    stroke(100);
-
-    point(A, 50);
-    point(B, 50);
-    point(C, 50);
-
+    for( t=0;t<1;t+=0.001){
+    udregnBezier(t)
+    drawBezier()
+    }
+    drawPoints()
 }
-function udregnBezier(){
-    Ax = lerp (p0x,p1x,0.2)
-    Ay = lerp(p0y,p1y,0.2)
-    Bx = lerp (p1x,p2x,0.2)
-    By = lerp(p1y,p2y,0.2)
-    Cx = lerp (p2x,p3x,0.2)
-    Cy = lerp(p2y,p3y,0.2)
-    Dx = lerp (Ax,Bx,0.2)
-    Dy = lerp(Ay,By,0.2)
-    Ex = lerp (Bx,Cx,0.2)
-    Ey = lerp(By,Cy,0.2)
+function udregnBezier(t){
+    Ax = lerp (p0x,p1x,t)
+    Ay = lerp(p0y,p1y,t)
+    Bx = lerp (p1x,p2x,t)
+    By = lerp(p1y,p2y,t)
+    Cx = lerp (p2x,p3x,t)
+    Cy = lerp(p2y,p3y,t)
+    Dx = lerp (Ax,Bx,t)
+    Dy = lerp(Ay,By,t)
+    Ex = lerp (Bx,Cx,t)
+    Ey = lerp(By,Cy,t)
  
-    P =  lerp (D,E,t)
+    Px =  lerp (Dx,Ex,t)
+    Py = lerp(Dy,Ey,t)
 }
 function drawBezier(){
-    circle()
+    circle(Px,Py,2)
+}
+function drawPoints(){
+    circle(p0x,p0y,10)
+    circle(p1x,p1y,10)
+    circle(p2x,p2y,10)
+    circle(p3x,p3y,10)
 }
