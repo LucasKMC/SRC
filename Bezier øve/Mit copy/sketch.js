@@ -1,11 +1,11 @@
 let p0x = 30
 let p0y = 500
-let p1x = 100
-let p1y = 100
-let p2x = 400
-let p2y = 100
-let p3x = 500
-let p3y = 500
+let p1x 
+let p1y 
+let p2x 
+let p2y 
+let p3x 
+let p3y 
 let t 
 let Ax
 let Ay
@@ -22,11 +22,23 @@ let Py
 
 function setup()
 {
+
     createCanvas(600, 600);
     background(220);
 } 
 function draw()
 {
+
+    clear();
+    background(220);
+    p3x = mouseX+100;
+    p3y = mouseY+800;
+    p1x = p3x*0.25 + 15
+    p1y = mouseY-(p3x*0.3)
+    p2x = p3x*0.75 + 15
+    p2y = mouseY-(p3x*0.3) 
+
+
 
     for( t=0;t<1;t+=0.001){
     udregnBezier(t)
@@ -57,4 +69,5 @@ function drawPoints(){
     circle(p1x,p1y,10)
     circle(p2x,p2y,10)
     circle(p3x,p3y,10)
+
 }
