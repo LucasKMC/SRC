@@ -1,6 +1,6 @@
 let p0x = 100
 let p0y = 500
-let p1x 
+let p1x
 let p1y 
 let p2x 
 let p2y 
@@ -23,7 +23,6 @@ let img
 let bezierpoints = []
 let travellenght = 0
 let traveling = false
-//aksdjskdnakkasjdnakdnasjdnkjsandkasndjasndjasndknasjdns
 let targetX = 400
 let targetY = 200
 let targetHit = false
@@ -38,27 +37,21 @@ function setup()
 function preload(){
     img = loadImage('./Assets/canon.png');
 }
+
 function draw()
 {
-    clear();
-    background(220);
-    p3x = mouseX+p0x+970;
-    p3y = mouseY+p0y-100;
-    p1x = p3x*0.25 + 15
-    p1y = mouseY*1.1-(p3x*0.2)
-    p2x = p3x*0.75 + 15
-    p2y = mouseY*1.1-(p3x*0.2) 
-    imageMode(CENTER);
-    image(img,p0x,p0y,100,100);
-    if(travellenght > bezierpoints.length){
-        
-        traveling = false
-    }
+    clear()
+    background(220)
+
+    imageMode(CENTER)
+    image(img,p0x,p0y,100,100)
+
+    bezierPointsMovement()
+    //drawPoints()
+
     if(traveling == true){
         canonball()
     }
-   
-    drawPoints()
 
     if(targetHit == true){
         targetCoordinats()
@@ -66,6 +59,7 @@ function draw()
 
     drawTarget()
 }
+
 function udregnBezier(){
     for(let i=0; i<1;i+=0.01){
     Ax = lerp (p0x,p1x,i)
@@ -85,15 +79,22 @@ function udregnBezier(){
     }
 
 }
-
+function bezierPointsMovement(){
+    p3x = mouseX+p0x+970;
+    p3y = mouseY+p0y-100;
+    p1x = p3x*0.25 + 15
+    p1y = mouseY*1.1-(p3x*0.2)
+    p2x = p3x*0.75 + 15
+    p2y = mouseY*1.1-(p3x*0.2) 
+}
+/*
 function drawPoints(){
     circle(p0x,p0y,10)
     circle(p1x,p1y,10)
     circle(p2x,p2y,10)
     circle(p3x,p3y,10)
-
 }
-
+*/
 function canonball(){
     if(bezierpoints[travellenght] && !targetHit){
         let xPos = bezierpoints[travellenght][0];
@@ -103,7 +104,7 @@ function canonball(){
 
         targetCanonballDistance = sqrt((targetX-xPos)**2+(targetY-yPos)**2)
 
-        if(targetCanonballDistance <= 50){
+        if(targetCanonballDistance <= 50){//Tjekker om kanonkugle rammer
             targetHit = true
             traveling = false
         }
@@ -113,16 +114,13 @@ function canonball(){
 }
 
 function mousePressed(){
-
     if(mouseButton === LEFT){
         bezierpoints = []
         udregnBezier()
         travellenght = 0
         traveling = true
-
     }
 }
-/////////////////////////////////dgsdgaudbsauhdbasubdusabduasbdsudsaubsda
 
 function drawTarget(){
     circle(targetX, targetY, 50)
@@ -130,7 +128,7 @@ function drawTarget(){
 }
 
 function targetCoordinats(){
-    targetX = random(0, width)
-    targetY = random(0, height)
+    targetX = random(500, width-100)
+    targetY = random(100, height-100)
 }
 
