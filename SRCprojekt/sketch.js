@@ -23,10 +23,14 @@ let img
 let bezierpoints = []
 let travellenght = 0
 let traveling = false
+//aksdjskdnakkasjdnakdnasjdnkjsandkasndjasndjasndknasjdns
+let targetX = 400
+let targetY = 200
+let targetHit = false
+let targetCanonballDistance
 
 function setup()
 {
-
     createCanvas(1000, 600);
     background(220);
 } 
@@ -36,8 +40,6 @@ function preload(){
 }
 function draw()
 {
-   
-
     clear();
     background(220);
     p3x = mouseX+p0x+970;
@@ -56,15 +58,13 @@ function draw()
         canonball()
     }
    
-
-
-    //for( t=0;t<1;t+=0.11){
-    //udregnBezier(t)
-    //drawBezier()
-    //}
-
     drawPoints()
-    
+
+    if(targetHit == true){
+        targetCoordinats()
+    }
+
+    drawTarget()
 }
 function udregnBezier(){
     for(let i=0; i<1;i+=0.01){
@@ -85,9 +85,7 @@ function udregnBezier(){
     }
 
 }
-function drawBezier(){
-    circle(Px,Py,2)
-}
+
 function drawPoints(){
     circle(p0x,p0y,10)
     circle(p1x,p1y,10)
@@ -97,11 +95,21 @@ function drawPoints(){
 }
 
 function canonball(){
-    if(bezierpoints[travellenght]){
-        circle(bezierpoints[travellenght][0],bezierpoints[travellenght][1],50)
+    if(bezierpoints[travellenght] && !targetHit){
+        let xPos = bezierpoints[travellenght][0];
+        let yPos = bezierpoints[travellenght][1];
+
+        circle(xPos,yPos,50)
+
+        targetCanonballDistance = sqrt((targetX-xPos)**2+(targetY-yPos)**2)
+
+        if(targetCanonballDistance <= 50){
+            targetHit = true
+            traveling = false
+        }
         travellenght++
     }
-    
+
 }
 
 function mousePressed(){
@@ -111,7 +119,18 @@ function mousePressed(){
         udregnBezier()
         travellenght = 0
         traveling = true
-        
 
     }
 }
+/////////////////////////////////dgsdgaudbsauhdbasubdusabduasbdsudsaubsda
+
+function drawTarget(){
+    circle(targetX, targetY, 50)
+    targetHit = false
+}
+
+function targetCoordinats(){
+    targetX = random(0, width)
+    targetY = random(0, height)
+}
+
