@@ -29,7 +29,6 @@ let targetHit = false;
 let targetCanonballDistance;
 let xPos
 let yPos
-
 function setup()
 {
     createCanvas(1000, 600);
@@ -60,6 +59,7 @@ function draw()
 
     drawTarget();
     boundaries();
+ 
 }
 
 function udregnBezier(){
@@ -79,8 +79,8 @@ function udregnBezier(){
     Py = lerp(Dy,Ey,i);
     bezierpoints.push([Px,Py]);
     }
-}
 
+}
 function bezierPointsMovement(){
     p3x = mouseX+p0x+970;
     p3y = mouseY+p0y-100;
@@ -91,21 +91,22 @@ function bezierPointsMovement(){
 }
 
 function canonball(){
-    if(bezierpoints[travellenght] && !targetHit){
-        xPos = bezierpoints[travellenght][0];
-        yPos = bezierpoints[travellenght][1];
+    if(bezierpoints[travellenght] && !targetHit){//Hvis bezierpoints har en værdi og targetHit ikke er sandt så gør nedstående
+        xPos = bezierpoints[travellenght][0];//xPos er bezierpoints første værdi 
+        yPos = bezierpoints[travellenght][1];//yPos er bezierpoints anden værdi
 
-        circle(xPos,yPos,50);
+        circle(xPos,yPos,50); //Der bliver tegnet en cirkel(kanonkuglen) med koordinaterne xPos og yPos med en radius på 50
 
-        targetCanonballDistance = sqrt((targetX-xPos)**2+(targetY-yPos)**2);
+        targetCanonballDistance = sqrt((targetX-xPos)**2+(targetY-yPos)**2);//Udregner afstanden mellem målet og kanonkuglen
 
-        if(targetCanonballDistance <= 50){
-            targetHit = true
-            traveling = false
+        if(targetCanonballDistance <= 50){// Hvis afstanden mellem målet og kanonkuglen er mindre ind eller det samme som 50 så gør nedstående
+            targetHit = true// targetHit bliver sat til true
+            traveling = false//traveling bliver sat false
         }
     
-        travellenght++;
+        travellenght++;//travellenght bliver adderet med sig selv og 1
     }
+
 }
 
 function mousePressed(){
@@ -132,5 +133,3 @@ function boundaries(){
             traveling = false;
         }
 }
-    
-
