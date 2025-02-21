@@ -29,6 +29,7 @@ let targetHit = false;
 let targetCanonballDistance;
 let xPos
 let yPos
+
 function setup()
 {
     createCanvas(1000, 600);
@@ -48,7 +49,6 @@ function draw()
     image(img,p0x,p0y,100,100);
 
     bezierPointsMovement();
-    //drawPoints()
 
     if(traveling == true){
         canonball()
@@ -60,7 +60,6 @@ function draw()
 
     drawTarget();
     boundaries();
- 
 }
 
 function udregnBezier(){
@@ -80,8 +79,8 @@ function udregnBezier(){
     Py = lerp(Dy,Ey,i);
     bezierpoints.push([Px,Py]);
     }
-
 }
+
 function bezierPointsMovement(){
     p3x = mouseX+p0x+970;
     p3y = mouseY+p0y-100;
@@ -90,14 +89,7 @@ function bezierPointsMovement(){
     p2x = p3x*0.75 + 15;
     p2y = mouseY*1.1-(p3x*0.2);
 }
-/*
-function drawPoints(){
-    circle(p0x,p0y,10)
-    circle(p1x,p1y,10)
-    circle(p2x,p2y,10)
-    circle(p3x,p3y,10)
-}
-*/
+
 function canonball(){
     if(bezierpoints[travellenght] && !targetHit){
         xPos = bezierpoints[travellenght][0];
@@ -107,14 +99,13 @@ function canonball(){
 
         targetCanonballDistance = sqrt((targetX-xPos)**2+(targetY-yPos)**2);
 
-        if(targetCanonballDistance <= 50){//Tjekker om kanonkugle rammer
+        if(targetCanonballDistance <= 50){
             targetHit = true
             traveling = false
         }
     
         travellenght++;
     }
-
 }
 
 function mousePressed(){
